@@ -1,0 +1,365 @@
+	<html>
+	<head bgcolor="#00FFFF">
+
+		<title> The 50 States </title>
+
+		<!--This will make all the functions in javascript-->
+
+		<script type='text/javascript'>
+
+		var states = ["alabama", "alaska", "arizona","arkansas", "california", "colorado", "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho", "illinois", "indiana",  "iowa",  "kansas", "kentucky", "louisiana", "maine", "maryland", "massachusetts",  "michigan", "minnesota",  "mississippi",  "missouri",  "montana", "nebraska",  "nevada",  "new hampshire", "new jersey",  "new mexico",  "new york", "north carolina",  "north dakota",  "ohio",  "oklahoma", "oregon",  "pennsylvania", "rhode island", "south carolina",  "south dakota",  "tennessee", "texas",  "utah",  "vermont", "virginia",  "washington", "west virginia", "wisconsin",  "wyoming"];
+		var remaining=[];
+
+		var statesleft=50;
+
+		var check=0;
+
+
+		var starter=0;
+		function endFunc(){
+
+			alert("Times Up!");
+			document.getElementById("mytext").disabled = true;
+
+	//alert("You missed: "+states.toString());
+	document.getElementById("finish").innerHTML="You missed: "+states.toString();
+}
+
+function winFunc(){
+
+	alert("Good job, you named all 50 states!")
+
+	window.clearTimeout();
+
+}
+
+function enterGame(){
+
+	if (starter==0)
+	{
+		document.getElementById("remains").innerHTML="You didnt start the game!";
+		return;
+	}
+	var elemtxt=document.getElementById("mytext");
+
+	elemtxt=elemtxt.value.toLowerCase();
+
+	for(i=0;i<remaining.length;i++)
+
+	{
+
+		if(elemtxt==remaining[i])
+
+		{
+
+			check=1;
+
+		}
+
+	}
+
+	if(check==1)
+
+	{
+
+		var form=document.getElementById("mytext");
+
+		form.value='';
+
+	}
+
+	else
+
+	{
+
+		for(j=0;j<states.length;j++)
+
+		{
+
+			if(elemtxt==states[j])
+
+			{
+
+				states.splice(j,1);
+				statesleft--;
+
+				remaining.push(elemtxt);
+
+				if(remaining.length==50)
+
+				{
+
+					winFunc();
+
+				}
+
+				document.getElementById("remains").innerHTML = statesleft+" states remaining";
+
+				var form=document.getElementById("mytext");
+
+				form.value='';
+
+				document.getElementById("tester").innerHTML="You entered: "+remaining.toString();
+			}
+
+			else
+
+			{
+
+				var form=document.getElementById("mytext");
+
+				form.value='';
+			}
+
+		}
+
+	}
+
+	check=0;
+}
+
+function enterGamea(){
+
+	if (starter==0)
+	{
+		document.getElementById("remains").innerHTML="You didnt start the game!";
+		return;
+	}
+	var elemtxt=document.getElementById("mytext");
+
+	elemtxt=elemtxt.value.toLowerCase();
+
+	for(i=0;i<remaining.length;i++)
+
+	{
+
+		if(elemtxt==remaining[i])
+
+		{
+
+			check=1;
+
+		}
+
+	}
+
+	if(check==1)
+
+	{
+
+		var form=document.getElementById("mytext");
+
+		form.value='';
+
+	}
+
+	else
+
+	{
+
+		for(j=0;j<states.length;j++)
+
+		{
+
+			if(elemtxt==states[j])
+
+			{
+
+				states.splice(j,1);
+				statesleft--;
+
+				remaining.push(elemtxt);
+
+				if(remaining.length==50)
+
+				{
+
+					winFunc();
+
+				}
+
+				document.getElementById("remains").innerHTML = statesleft+" states remaining";
+
+				var form=document.getElementById("mytext");
+
+				form.value='';
+
+				document.getElementById("tester").innerHTML="You entered: "+remaining.toString();
+			}
+
+		}
+
+	}
+
+	check=0;
+}
+
+function showIt(){
+
+	var elemtxt=document.getElementById("mytext");
+
+	alert("You entered: "+elemtxt.value);
+
+}
+
+var seconds = 300;
+
+function secondPassed() {
+
+	var minutes = Math.round((seconds - 30)/60);
+
+	var remainingSeconds = seconds % 60;
+
+	if (remainingSeconds < 10) {
+
+		remainingSeconds = "0" + remainingSeconds;
+
+	}
+
+	document.getElementById('newtime').innerHTML = minutes + ":" + remainingSeconds;
+
+	if (seconds == 0) {
+
+		clearInterval(countdownTimer);
+
+		document.getElementById('newtime').innerHTML = "Buzz Buzz";
+
+	} else {
+
+		seconds--;
+
+	}
+
+}
+
+
+
+
+
+
+
+function startGame(){
+	var countdownTimer = setInterval('secondPassed()',1000);
+	display = document.querySelector('#time');
+	starter=1;
+	document.getElementById("newtime").innerHTML="5:00";
+	window.setTimeout("endFunc()", 300300);
+
+	document.getElementById("mytext").focus();
+	document.getElementById("mytext").select();
+	var ex=document.getElementById('starterbut');
+	ex.parentNode.removeChild(ex);
+}
+
+</script>
+<!--This is the webpage-->
+</head>
+
+<body >
+	<span>
+
+		<h1 align="center" id="yar1"> Play the 50 States Game! </h1>
+
+		<div class="test1">
+
+			<p id="newtime"> After you click the Start button, you will have 5 minutes to name all fifty states! </p>
+
+			<button id ="starterbut" type=button onclick="startGame()"  style="color:#FF0000" accesskey=S> <u>S</u>tart </button>
+
+			<p> </p>
+		</div>
+		<div class="wrapper">
+
+			<input type="text" name="mytext" id="mytext" oninput="enterGamea()" onpaste="enterGamea()" style="color:#FF0000" onkeydown="if (event.keyCode== 13) enterGame()"/>
+
+			<p id="remains"> 50 states remaining </p>
+			<p id="tester"> </p>
+		</div>
+
+	</span>
+
+	<p id="finish"> </p>
+	<!--This centers the button and input text-->
+	<style>
+	.test1
+	{
+
+		text-align: center;
+
+	}
+
+	.wrapper
+	{
+
+		text-align: center;
+
+	}
+
+	span
+	{
+
+		position:fixed;
+
+		top:25%;
+
+		left:35%;
+
+		border-radius: 40px;
+
+		border: 2px solid #FF0000;
+
+		padding: 20px;
+
+		width: 450px;
+
+		height: 225px;
+
+	}
+
+
+	#finish
+	{
+		text-align: center;
+		color: #FF0000;
+		top:60%;
+		left:0%;
+	}
+	body
+	{
+		background-image:url(usa.PNG);
+
+		background-repeat:no-repeat;
+
+		background-size:cover;
+	}
+
+	p
+	{
+
+		color: #FF0000;
+		font-weight:bold;
+
+	}
+
+	h1{
+
+		color:#FF0000;
+
+	}
+	input
+	{
+		color:#FF0000;
+
+	}
+	button{
+
+		font-weight:bold;
+
+	}
+
+	</style>
+	<!--<img src="usa.gif">-->
+
+</div>
+</body>
+</html>
